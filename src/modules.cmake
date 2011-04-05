@@ -1,0 +1,5 @@
+add_subdirectory(system)
+add_subdirectory(hardware)
+add_subdirectory(generator)
+add_subdirectory(lofar)
+add_subdirectory(interfaces)

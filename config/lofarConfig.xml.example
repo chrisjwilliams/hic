@@ -1,0 +1,10 @@
+<groups>
+   <group name="LCU">
+        <parameter name="host" value="localhost">
+                <doc>
+                        The hostname or ip address of the LCU unit
+                </doc>
+        </parameter>
+   </group>
+</groups>
+

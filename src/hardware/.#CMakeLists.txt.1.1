@@ -1,0 +1,13 @@
+SUBPACKAGE(hardware)
+
+set( hardware_src
+    src/ResourceSpec.cpp
+    src/State.cpp
+    src/StateParameter.cpp
+    src/ParameterGroup.cpp
+)
+
+SUBPACKAGE_LIBRARY( hardware ${hardware_src} )
+SUBPACKAGE_SET_EXTERNAL_LIBRARIES( ${QT_QTCORE_LIBRARY} )
+
+add_subdirectory(test)

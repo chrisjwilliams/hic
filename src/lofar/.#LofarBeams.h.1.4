@@ -1,0 +1,45 @@
+#ifndef LOFARBEAMS_H
+#define LOFARBEAMS_H
+
+#include "State.h"
+#include "LofarBeam.h"
+
+/**
+ * @file LofarBeams.h
+ */
+
+namespace hic {
+
+/**
+ * @class LofarBeams
+ * 
+ * @brief
+ *   A top level view of the state of the Lofar Station in terms of Beams
+ * @details
+ * 
+ */
+class LofarBeams : public State
+{
+    public:
+        /// LofarBeams constructor.
+        LofarBeams();
+
+        /// LofarBeams destructor.
+        virtual ~LofarBeams();
+
+        /// cloning operator
+        virtual LofarBeams* clone() const;
+
+        /// return a list of defined beams
+        const QList<LofarBeam>& beams() const { return _beams; };
+
+        /// add a beam tot he configuration
+        void addBeam(const LofarBeam& beam);
+
+    private:
+        QList<LofarBeam> _beams;
+};
+
+} // namespace hic
+
+#endif // LOFARBEAMS_H 

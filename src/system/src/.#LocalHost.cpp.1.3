@@ -1,0 +1,31 @@
+#include "LocalHost.h"
+#include "system/LocalHostFileTransfer.h"
+#include "system/LocalHostExecAgent.h"
+#include "hardware/SingleParameter.h"
+
+namespace hic {
+
+
+/**
+ * @details Constructs a LocalHost object.
+ */
+LocalHost::LocalHost()
+    : Platform()
+{
+    boost::shared_ptr<SingleParameter<QString> > host(
+        new SingleParameter("hostname", 
+            "the network name of the local machine") );
+    host->set(QString("localhost"));
+    setHost( host );
+    setFileTransferAgent( new LocalHostFileTransfer );
+    setExecAgent( new LocalHostExecAgent );
+}
+
+/**
+ * @details Destroys the LocalHost object.
+ */
+LocalHost::~LocalHost()
+{
+}
+
+} // namespace hic

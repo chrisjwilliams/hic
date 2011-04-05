@@ -1,0 +1,68 @@
+#ifndef PLATFORM_H
+#define PLATFORM_H
+
+#include <QList>
+#include <QString>
+#include <boost/shared_ptr.hpp>
+
+/**
+ * @file Platform.h
+ */
+
+namespace hic {
+    class Report;
+    class AbstractFileTransfer;
+    class AbstractExecAgent;
+    class Command;
+    class ParameterQObject;
+
+/**
+ * @class Platform
+ * 
+ * @brief
+ *   Base class for Accessing different platforms
+ * @details
+ *   Inheriting class must call the
+ *   setFileTransferAgent() method in its constructor
+ * 
+ */
+class Platform
+{
+    public:
+        /// Platform constructor.
+        Platform();
+        Platform(const Platform&);
+
+        /// Platform destructor.
+        virtual ~Platform();
+
+        /// associate the hostname with the specified parameter
+        void setHost(boost::shared_ptr<ParameterQObject> hostname);
+
+        /// associate the hostname with the specified port
+        void setPort(boost::shared_ptr<ParameterQObject> port);
+
+        /// return a descriptive name for the platform
+        const QString name() const;
+
+        /// execute the commands on the specified platform
+        Report exec( const QList<Command>& ) const;
+
+        /// methods to move files to/from the platform
+        Report getFile(const QString& remote_filename, const QString& local_filename ) const;
+        Report putFile(const QString& local_filename, const QString& remote_filename ) const;
+
+    protected:
+        void setFileTransferAgent(AbstractFileTransfer*); // must be called be inheriting class
+        void setExecAgent(AbstractExecAgent*); // must be called be inheriting class
+
+    private:
+        boost::shared_ptr<AbstractFileTransfer>   _fileTransferAgent;
+        boost::shared_ptr<AbstractExecAgent>      _execAgent;
+        boost::shared_ptr<ParameterQObject>       _port;
+        boost::shared_ptr<ParameterQObject>       _host;
+};
+
+} // namespace hic
+
+#endif // PLATFORM_H 
